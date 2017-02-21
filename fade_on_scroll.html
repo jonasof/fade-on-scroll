@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <script
+			  src="https://code.jquery.com/jquery-3.1.1.js"
+			  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+			  crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div style="height: 100%; background-image: url(autumn-by-the-lake.jpg); background-size: cover";>
+        </div>
+        <div style="height: 100%; background-image: url(autumn-by-the-lake.jpg); background-size: cover";>
+        </div>
+        <div style="height: 100%; background-image: url(autumn-by-the-lake.jpg); background-size: cover";>
+        </div>
+        <div style="height: 100%; background-image: url(autumn-by-the-lake.jpg); background-size: cover";>
+        </div>
+        <div style="height: 100%; background-image: url(autumn-by-the-lake.jpg); background-size: cover";>
+        </div>
+        <script>
+
+            function FadeOnScroll(options) {
+
+                this.defaults = {
+                    "element": '.fade_on_scroll',
+                    "start_fade": 40/100, //percentage
+                    "offset": 0 //for headers, not implemented yet
+                }
+
+                this.options = this.defaults;
+                for (var attrname in options) { this.options[attrname] = options[attrname]; }
+
+                var self = this;
+
+                this.elements = $("body > div");
+                this.window = $(window);
+
+                self.window.scroll(function(aha){
+
+                    this.elements.each(function(el){
+
+                        var element = $(this);
+
+                        var scroll =  self.window.scrollTop() - element.offset().top;
+                        var painel = element.height();
+
+                        var start_fade_on = painel * self.options.start_fade;
+                        var size_fade_on = painel - start_fade_on;
+
+                        if (scroll > start_fade_on) {
+
+                            var percentage = (scroll-start_fade_on) / size_fade_on;
+                            if (percentage > 1) percentage = 1;
+
+                            element.css("opacity", 1 - percentage);
+                        } else {
+                            element.css("opacity", 1);
+                        }
+                    });
+                });
+            }
+
+            FadeOnScroll({
+                'element' : "body > div"
+            })
+        </script>
+    </body>
+</html>
